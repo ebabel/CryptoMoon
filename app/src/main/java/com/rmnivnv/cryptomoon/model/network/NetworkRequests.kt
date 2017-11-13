@@ -20,13 +20,13 @@ class NetworkRequests(private val cryptoCompareAPI: CryptoCompareAPI,
                 .map { getAllCoinsFromJson(it) }
     }
 
-    fun getPrice(map: Map<String, ArrayList<String?>>): Single<ArrayList<DisplayCoin>> {
+    fun getPrice(map: Map<String, ArrayList<String>>): Single<ArrayList<DisplayCoin>> {
         return cryptoCompareAPI.getPrice(getQuery(map, FSYMS), getQuery(map, TSYMS))
                 .subscribeOn(Schedulers.io())
                 .map { getCoinDisplayBodyFromJson(it, map) }
     }
 
-    private fun getQuery(map: Map<String, ArrayList<String?>>, type: String): String {
+    private fun getQuery(map: Map<String, ArrayList<String>>, type: String): String {
         var result = ""
         map.forEach { (key, value) ->
             if (key == type) value.forEach { result += """$it,""" }

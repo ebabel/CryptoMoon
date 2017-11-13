@@ -24,8 +24,8 @@ class CoinInfoPresenter @Inject constructor(private val context: Context,
 
     private val disposable = CompositeDisposable()
     private var coin: DisplayCoin? = null
-    private var from: String? = null
-    private var to: String? = null
+    private var from: String = ""
+    private var to: String = ""
 
     override fun onCreate(extras: Bundle) {
         if (extras[NAME] != null && extras[TO] != null) {
